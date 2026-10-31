@@ -1,0 +1,849 @@
+:root {
+    --primary: #2e003e; /* Dark Purple */
+    --primary-light: #5d007d;
+    --accent: #9c27b0; /* Vibrant Light Purple */
+    --accent-soft: #f3e5f5; /* Very Light Purple for backgrounds */
+    --text-dark: #1a0026;
+    --text-light: #ffffff;
+    --bg-light: #ffffff; /* Clean White */
+    --glass: rgba(255, 255, 255, 0.95);
+    --glass-dark: rgba(46, 0, 62, 0.9);
+    --shadow: 0 10px 40px -10px rgba(46, 0, 62, 0.15);
+    --transition: all 0.4s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Footer brand logo: locked square size so fluid-image rules
+   (.img-fluid, max-width caps) can never blow it up again */
+.footer-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Navbar — even spacing: vertical rhythm from one padding value (no jump
+   on scroll), horizontal gutters from .container, consistent link gaps */
+.navbar {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    padding: 0.45rem 0;
+}
+
+/* Slim, even navbar controls: smaller buttons, tighter links, logo radius */
+.navbar-brand img {
+    border-radius: 10px;
+}
+
+.navbar .btn-premium {
+    padding: 0.55rem 1.3rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+}
+
+#notifDropdown {
+    background: var(--accent-soft);
+    border: 1px solid rgba(46, 0, 62, 0.1);
+    color: var(--primary);
+}
+
+.navbar.scrolled {
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(46, 0, 62, 0.08);
+}
+
+.navbar .container {
+    gap: 1rem;
+}
+
+.navbar-brand {
+    margin-right: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.navbar .navbar-nav {
+    gap: 0.25rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.nav-link {
+    color: var(--primary);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.98rem;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+}
+
+/* Glass Buttons */
+.btn-premium {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 2.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    border: none;
+}
+
+.btn-premium:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-light);
+    color: var(--primary-light);
+}
+
+.btn-outline:hover {
+    background: var(--primary-light);
+    color: white;
+}
+
+/* Cards */
+.card-premium {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(46, 0, 62, 0.05);
+}
+
+.card-premium:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-container {
+    height: 250px;
+    overflow: hidden;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.card-premium:hover img {
+    scale: 1.1;
+}
+
+/* Swipeable room cards: per-card touch carousel filling the image area */
+.card-img-container .carousel,
+.card-img-container .carousel-inner,
+.card-img-container .carousel-item {
+    height: 100%;
+}
+.card-img-container .carousel-item img {
+    object-fit: cover;
+}
+.card-carousel-btn {
+    width: 36px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.card-img-container:hover .card-carousel-btn {
+    opacity: 0.9;
+}
+.card-carousel-btn .carousel-control-prev-icon,
+.card-carousel-btn .carousel-control-next-icon {
+    width: 26px;
+    height: 26px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 50%;
+    background-size: 60% 60%;
+}
+@media (hover: none) {
+    .card-carousel-btn {
+        opacity: 0.9;
+    }
+}
+
+/* Swipeable room + event galleries (1–10 photos, touch enabled) */
+.room-gallery-img,
+.pkg-gallery-img {
+    height: 100%;
+    min-height: 250px;
+    max-height: 400px;
+    object-fit: cover;
+}
+#roomGalleryCarousel .carousel-indicators [data-bs-target],
+#pkgGalleryCarousel .carousel-indicators [data-bs-target] {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+#roomGalleryCarousel .carousel-control-prev,
+#roomGalleryCarousel .carousel-control-next,
+#pkgGalleryCarousel .carousel-control-prev,
+#pkgGalleryCarousel .carousel-control-next {
+    width: 44px;
+    opacity: 0.85;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Roomier inputs inside the wide Create Account modal */
+#registerModal .form-control,
+#registerModal .form-select {
+    padding: 0.65rem 1rem;
+}
+#registerModal .form-label {
+    margin-bottom: 0.4rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Stats */
+.stat-item {
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Flatpickr - Booked dates as continuous red bars */
+.flatpickr-day.booked-date,
+.flatpickr-day.booked-date:hover {
+    background: #f8d7da !important;
+    color: #dc3545 !important;
+    border-color: #f8d7da !important;
+    opacity: 1 !important;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+/* Single isolated booked day */
+.flatpickr-day.booked-range-single {
+    border-radius: 4px !important;
+}
+/* Start of a booked range */
+.flatpickr-day.booked-range-start {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-right: -1px;
+    z-index: 1;
+}
+/* Middle of a booked range */
+.flatpickr-day.booked-range-mid {
+    border-radius: 0 !important;
+    margin: 0 -1px;
+    z-index: 1;
+}
+/* End of a booked range */
+.flatpickr-day.booked-range-end {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -1px;
+    z-index: 1;
+}
+
+/* Flatpickr - Normal disabled dates (past dates, etc.) keep default styling */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    background: transparent !important;
+    color: #ccc !important;
+    border-color: transparent !important;
+    opacity: 1 !important;
+    cursor: not-allowed;
+}
+
+/* =============================================
+   GLOBAL FLUID MEDIA (base, all screens)
+   Only max-width is enforced here. There is deliberately NO global
+   height:auto: it would override the height="50/60/40" logo
+   attributes (making the navbar logo blow up to full width) and
+   would also beat .card-img-container img { height:100% }.
+   height:auto is already the browser default, and Bootstrap's
+   .img-fluid sets it explicitly wherever fluid height is wanted.
+   ============================================= */
+img {
+    max-width: 100%;
+}
+canvas {
+    max-width: 100%;
+}
+iframe, video {
+    max-width: 100%;
+}
+/* Prevent iOS auto-zoom on form focus */
+input.form-control, select.form-select, select.form-control,
+textarea.form-control {
+    font-size: 16px;
+}
+@media (min-width: 768px) {
+    input.form-control, select.form-select, select.form-control,
+    textarea.form-control {
+        font-size: 1rem;
+    }
+}
+/* Flatpickr must never overflow small screens */
+.flatpickr-calendar {
+    max-width: 92vw !important;
+}
+/* Long proof / QR images */
+.proof-img-modal {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Missing utilities actually used across the markup */
+.x-small {
+    font-size: 0.75rem !important;
+    line-height: 1.4;
+}
+.text-accent {
+    color: var(--accent) !important;
+}
+.bg-accent-soft {
+    background-color: var(--accent-soft) !important;
+}
+.fw-700 {
+    font-weight: 700 !important;
+}
+.fw-800 {
+    font-weight: 800 !important;
+}
+
+/* Toast popups must never overflow a phone viewport */
+#toastContainer,
+#adminToastContainer {
+    max-width: calc(100vw - 1.5rem);
+    width: max-content;
+}
+#toastContainer .toast,
+#adminToastContainer .toast {
+    max-width: 100%;
+}
+#toastContainer .toast-body,
+#adminToastContainer .toast-body {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* =============================================
+   MOBILE RESPONSIVENESS
+   ============================================= */
+
+/* Hover-only effects: only apply on devices that support hover */
+@media (hover: hover) {
+    .card-premium:hover {
+        transform: translateY(-10px);
+    }
+    .card-premium:hover img {
+        scale: 1.1;
+    }
+    .nav-link:hover::after {
+        transform: scaleX(1);
+    }
+}
+
+/* Large tablets / small desktops */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1050;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        height: 100dvh;
+        overflow-y: auto;
+        width: 280px;
+    }
+    .sidebar.active {
+        transform: translateX(0);
+        box-shadow: 0 0 60px rgba(0,0,0,0.35);
+    }
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+    }
+    .sidebar-overlay.active {
+        display: block;
+    }
+    .main-content {
+        margin-left: 0 !important;
+        padding: 20px 15px !important;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    .admin-topbar {
+        padding: 10px 15px !important;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    .sidebar-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    /* Admin page headers: stack title + action button */
+    .main-content .d-flex.justify-content-between.align-items-center {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .main-content .d-flex.justify-content-between.align-items-center .btn {
+        width: 100%;
+    }
+    /* Detail / premium modals: single column */
+    .info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .modal-premium .modal-body {
+        padding: 1.25rem !important;
+    }
+    .modal-premium .modal-header {
+        padding: 1.25rem !important;
+    }
+    .modal-premium .modal-footer {
+        padding: 1rem 1.25rem !important;
+    }
+    .modal-premium .modal-footer .d-flex {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch !important;
+    }
+    .action-bar {
+        width: 100%;
+    }
+    .action-bar .btn-action {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-attachment: scroll;
+        padding: 100px 15px 60px;
+    }
+    .hero-content {
+        padding: 0 5px;
+    }
+    .hero-content h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    /* Hero CTAs stack full-width */
+    .hero .d-flex.justify-content-center {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hero .d-flex.justify-content-center .btn {
+        width: 100%;
+    }
+    /* Navbar mobile menu */
+    .navbar-collapse {
+        background: #fff;
+        border-radius: 16px;
+        padding: 1rem;
+        margin-top: 0.75rem;
+        box-shadow: 0 15px 40px rgba(46,0,62,0.15);
+    }
+    .navbar-nav {
+        align-items: stretch !important;
+        gap: 0.25rem;
+    }
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem !important;
+        border-radius: 10px;
+    }
+    .navbar-nav .nav-link:active {
+        background: var(--accent-soft);
+    }
+    .navbar-nav .btn-premium {
+        width: 100%;
+    }
+    /* Cards: disable lift on touch, keep tap affordance */
+    .card-premium, .stat-card, .package-card, .card-method {
+        transform: none !important;
+    }
+    .stat-item {
+        padding: 1.2rem;
+    }
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    .modal-header {
+        padding: 1rem;
+    }
+    .modal-body.p-5 {
+        padding: 1.5rem !important;
+    }
+    .notification-dropdown {
+        min-width: auto !important;
+        width: 90vw;
+        max-width: 340px;
+    }
+    /* Dropdowns never overflow viewport */
+    .dropdown-menu {
+        max-width: 92vw !important;
+    }
+    .table-responsive {
+        font-size: 0.85rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    .footer-section {
+        text-align: center;
+    }
+    .footer-section .col-lg-2,
+    .footer-section .col-lg-3,
+    .footer-section .col-lg-4 {
+        margin-bottom: 1.5rem;
+    }
+    /* Room amenity chips wrap */
+    .card-premium .d-flex.gap-3 {
+        flex-wrap: wrap;
+        gap: 0.5rem !important;
+    }
+    /* Reservation action buttons: larger tap targets, wrap */
+    .table .btn {
+        min-height: 40px;
+    }
+    /* Proof section stacks */
+    .proof-container {
+        margin-bottom: 1rem;
+    }
+    /* Confirm modal buttons stack */
+    #bookingConfirmModal .row.g-2 > div,
+    #thankYouModal .modal-body {
+        width: 100%;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+        line-height: 1.25;
+    }
+    .hero-content h1 br {
+        display: none;
+    }
+    .hero-content p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+    .hero-content .badge {
+        font-size: 0.65rem;
+    }
+    .btn-premium {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+    }
+    .btn-lg {
+        width: 100%;
+    }
+    .navbar {
+        padding: 0.6rem 0;
+    }
+    .navbar-brand img {
+        height: 32px !important;
+    }
+    .card-img-container {
+        height: 180px;
+    }
+    .room-gallery-img,
+    .pkg-gallery-img {
+        min-height: 220px;
+        max-height: 300px;
+    }
+    .card-premium .p-4 {
+        padding: 1.1rem !important;
+    }
+    .modal-content {
+        border-radius: 15px;
+    }
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    .modal-fullscreen-sm-down .modal-content {
+        border-radius: 0;
+    }
+    .modal-lg, .modal-xl {
+        max-width: 100%;
+    }
+    .modal-body.p-5, .modal-body.p-4 {
+        padding: 1.25rem !important;
+    }
+    .modal-body .row.g-5 {
+        --bs-gutter-x: 1rem;
+        --bs-gutter-y: 1rem;
+    }
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    .stat-card {
+        padding: 1.1rem !important;
+    }
+    .otp-input {
+        font-size: 1.2rem !important;
+        letter-spacing: 4px !important;
+    }
+    .booking-terms-box {
+        max-height: 100px !important;
+        font-size: 0.85rem !important;
+    }
+    .table td, .table th {
+        padding: 0.6rem 0.5rem;
+        white-space: nowrap;
+        font-size: 0.82rem;
+    }
+    .hide-mobile {
+        display: none !important;
+    }
+    .action-btn {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    /* Tooltips would overflow small screens — hide bubble, keep button */
+    .action-btn[data-tip]::before,
+    .action-btn[data-tip]::after {
+        display: none !important;
+    }
+    .sidebar {
+        width: min(280px, 85vw);
+    }
+    .profile-col.border-end {
+        border: none !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+        padding-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    /* Footer stacks and centers */
+    footer .row > div {
+        text-align: center;
+    }
+    footer .d-flex.gap-3 {
+        justify-content: center;
+    }
+    footer .btn-outline-light.rounded-circle {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* My-reservations / admin row actions wrap instead of overflowing */
+    .table .d-flex.gap-1 {
+        flex-wrap: wrap;
+    }
+    /* Booking confirm + event rules consent: full-width buttons */
+    #bookingConfirmModal .row.g-2 {
+        flex-direction: column;
+    }
+    #bookingConfirmModal .row.g-2 > div {
+        width: 100%;
+    }
+    /* Notification bell dropdown fits */
+    .dropdown-menu {
+        font-size: 0.85rem;
+    }
+    /* Charts keep height readable */
+    #bookingChart {
+        max-height: 260px;
+    }
+    /* Payment / QR images center + cap size */
+    #roomMethodDetails img,
+    #eventMethodDetails img,
+    .qr-preview {
+        max-width: 100%;
+        height: auto;
+    }
+    /* Admin stat header stacks */
+    .main-content h2 {
+        font-size: 1.4rem;
+    }
+    .main-content .btn-premium,
+    .main-content .btn-primary,
+    .main-content .btn-info {
+        min-height: 44px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .hero-content h1 {
+        font-size: 1.55rem;
+    }
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+/* Scroll-to-top button (markup + tiny script live in each page) */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(46, 0, 62, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background 0.3s;
+    z-index: 1030;
+    cursor: pointer;
+}
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+.scroll-top-btn:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+@media (max-width: 576px) {
+    .scroll-top-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Reduced motion: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

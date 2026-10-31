@@ -1,0 +1,24 @@
+# ── Private credentials (never commit) ───────────────────────────────
+config/secrets.local.php
+
+# ── Runtime uploads ──────────────────────────────────────────────────
+# Customer payment proof screenshots (personal data)
+assets/img/payments/
+# Temp / scratch folders
+uploads/
+tmp/
+*.tmp
+
+# ── School / local artefacts ─────────────────────────────────────────
+*.docx
+*.code-workspace
+NOW()
+test_curl.php
+debug_sms.php
+
+# ── OS / editor junk ─────────────────────────────────────────────────
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+.vscode/
