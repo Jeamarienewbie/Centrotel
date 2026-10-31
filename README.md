@@ -315,7 +315,7 @@ centrotel/
 ### Step 1 — Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/centrotel.git
+git clone https://github.com/Jeamarienewbie/Centrotel.git
 ```
 
 Place the `centrotel/` folder inside your web server's document root:
@@ -330,36 +330,32 @@ Place the `centrotel/` folder inside your web server's document root:
 4. Select the database and import the schema:
    - Click **Import** → Choose file → select `database.sql` → click **Go**.
 
-### Step 3 — Configure the Database Connection
+### Step 3 — Add Your Credentials
 
-Open `config/db.php` and update the credentials:
+All secrets live in one file that is **never committed**: `config/secrets.local.php`.
 
-```php
-$host   = '127.0.0.1';
-$dbname = 'centrotel_db';
-$user   = 'root';          // Your MySQL username
-$pass   = '';              // Your MySQL password
+```bash
+cp config/secrets.example.php config/secrets.local.php
 ```
 
-### Step 4 — Configure SMS & Email (OTP)
-
-In `config/sms_helper.php`, set your PhilSMS API credentials:
+Then fill in the values:
 
 ```php
-define('PHILSMS_TOKEN', 'YOUR_PHILSMS_API_TOKEN_HERE');
-define('PHILSMS_SENDER_ID', 'PhilSMS');
+return [
+    'sms_token'      => 'YOUR_PHILSMS_API_TOKEN',        // PhilSMS
+    'smtp_user'      => 'your_email@gmail.com',          // SMTP / Gmail app password
+    'smtp_pass'      => 'your_app_password',
+    'db_host_remote' => '',                              // only for live hosting
+    'db_name_remote' => '',
+    'db_user_remote' => '',
+    'db_pass_remote' => '',
+];
 ```
 
-In `config/email_helper.php`, set your SMTP credentials:
+Local development connects to `centrotel_db` on `localhost` as `root` with no
+password automatically (see `config/db.php`), so no edit is needed there.
 
-```php
-$mail->Host     = 'smtp.gmail.com';
-$mail->Username = 'your_email@gmail.com';
-$mail->Password = 'your_app_password';
-$mail->Port     = 587;
-```
-
-### Step 5 — Set Folder Permissions
+### Step 4 — Set Folder Permissions
 
 Ensure the `uploads/` directory is writable by the web server:
 
@@ -370,7 +366,7 @@ chmod -R 775 uploads/
 
 On Windows with XAMPP, this is typically not required.
 
-### Step 6 — Launch the Application
+### Step 5 — Launch the Application
 
 Open your browser and navigate to:
 
